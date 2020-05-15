@@ -1,6 +1,7 @@
 #ifndef CHATBOT_H_
 #define CHATBOT_H_
 
+#include <memory>
 #include <wx/bitmap.h>
 #include <string>
 
@@ -29,7 +30,12 @@ public:
 
     //// STUDENT CODE
     ////
-
+    
+    ChatBot(const ChatBot &s); 
+    ChatBot &operator=(const ChatBot &s);
+    ChatBot(ChatBot &&s);
+    ChatBot &operator=(ChatBot &&s); 
+    
     ////
     //// EOF STUDENT CODE
 

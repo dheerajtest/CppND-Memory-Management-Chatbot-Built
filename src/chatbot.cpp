@@ -7,6 +7,8 @@
 #include "graphnode.h"
 #include "graphedge.h"
 #include "chatbot.h"
+using std::cout;
+using std::endl;
 
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot()
@@ -44,6 +46,64 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot &s)
+{
+    cout << "ChatBot Copy Constructor" << endl;
+
+    _chatLogic = s._chatLogic;
+    _rootNode = s._rootNode;
+    _image = s._image;
+
+}
+
+ChatBot& ChatBot::operator=(const ChatBot &s)
+{
+    cout << "ChatBot Copy Assignment Operator" << endl;
+
+    if (this == &s) 
+        return *this;
+
+    _chatLogic = s._chatLogic;
+    _rootNode = s._rootNode;
+    _image = s._image;
+
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&s)
+{
+    cout << "ChatBot Move Contructor" << endl;
+
+    _chatLogic = s._chatLogic;
+    _rootNode = s._rootNode;
+    _image = s._image;
+
+    _chatLogic->SetChatbotHandle(this);    
+
+    s._chatLogic = nullptr;
+    s._rootNode = nullptr;
+    s._image = NULL;
+}
+
+ChatBot& ChatBot::operator=(ChatBot &&s)
+{
+    cout << "ChatBot Move Assignment Operator" << endl;
+
+    if (this == &s) 
+        return *this;
+
+    if (!_image) delete _image;
+
+    _chatLogic = s._chatLogic;
+    _rootNode = s._rootNode;
+    _image = s._image;
+
+    _chatLogic->SetChatbotHandle(this);    
+
+    s._chatLogic = nullptr;
+    s._rootNode = nullptr;
+    s._image = nullptr;
+}
 
 ////
 //// EOF STUDENT CODE
